@@ -63,12 +63,17 @@
             max-width: 800px;
             height: 100vh;
             max-height: 900px;
-            padding: 2rem;
+            padding: 1rem; /* Mặc định cho Mobile */
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
             text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+        }
+        
+        /* Padding lớn hơn cho Desktop/Tablet */
+        @media (min-width: 768px) {
+            .terminal-container { padding: 2rem; }
         }
 
         .hacker-title {
@@ -76,9 +81,9 @@
             text-transform: uppercase;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--term-dim); }
+        ::-webkit-scrollbar-thumb { background: var(--term-dim); border-radius: 3px; }
 
         .typewriter-text {
             white-space: pre-wrap;
@@ -96,21 +101,25 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .input-group {
-            margin-top: 2rem;
+            margin-top: auto;
             display: flex;
+            flex-wrap: wrap; /* Cho phép rớt dòng trên đt cực nhỏ */
             align-items: center;
             border-top: 1px dashed var(--term-dim);
             padding-top: 1rem;
+            gap: 0.5rem;
+            padding-bottom: 1rem;
         }
 
-        .input-prefix { margin-right: 10px; font-weight: bold; }
+        .input-prefix { font-weight: bold; }
 
         input[type="text"] {
             background: transparent;
             border: none;
             color: var(--term-green);
-            font-size: 1rem;
+            font-size: 1rem; /* Giữ chuẩn 1rem để iOS không tự động Zoom */
             flex-grow: 1;
+            min-width: 150px;
             outline: none;
             text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
             text-transform: uppercase;
@@ -123,11 +132,12 @@
             border: 1px solid var(--term-green);
             color: var(--bg-color);
             background-color: var(--term-green);
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
             transition: all 0.2s;
             text-transform: uppercase;
             font-weight: bold;
+            text-align: center;
         }
 
         .btn:hover {
@@ -171,13 +181,13 @@
         <!-- HEADER -->
         <div class="mb-4 border-b border-green-900 pb-2">
             <div class="flex justify-between items-center">
-                <h1 class="text-2xl md:text-3xl hacker-title tracking-widest text-green-400">CIPHER_PROTOCOL v9.0</h1>
+                <h1 class="text-xl md:text-3xl hacker-title tracking-widest text-green-400">CIPHER_PROTOCOL</h1>
                 <div class="text-right">
-                    <div class="text-xs text-green-600">THỜI GIAN KẾT NỐI</div>
-                    <div id="timer-display" class="text-2xl hacker-title tracking-widest text-green-500">--:--</div>
+                    <div class="text-[10px] md:text-xs text-green-600">THỜI GIAN KẾT NỐI</div>
+                    <div id="timer-display" class="text-xl md:text-2xl hacker-title tracking-widest text-green-500">--:--</div>
                 </div>
             </div>
-            <div class="flex justify-between text-xs text-green-600 mt-2">
+            <div class="flex flex-col sm:flex-row justify-between text-[10px] sm:text-xs text-green-600 mt-2 gap-1">
                 <span>TARGET: THE ARCHITECT</span>
                 <span>STATUS: <span id="status-text">INITIALIZING...</span></span>
             </div>
@@ -189,43 +199,44 @@
             <div><span class="cursor" id="typing-cursor"></span></div>
             
             <div id="hint-container" class="hidden">
-                <button onclick="showHint()" class="btn btn-hint mt-4">[ YÊU CẦU TRỢ GIÚP (HINT) ]</button>
+                <button onclick="showHint()" class="btn btn-hint mt-4 w-full sm:w-auto">[ YÊU CẦU TRỢ GIÚP (HINT) ]</button>
                 <div id="hint-text" class="text-cyan-400 text-sm mt-2 hidden italic border-l-2 border-cyan-500 pl-3"></div>
             </div>
 
-            <div id="feedback-msg" class="text-lg mt-4"></div>
+            <div id="feedback-msg" class="text-sm md:text-lg mt-4"></div>
             <!-- Decryption animation overlay -->
-            <div id="decryption-ui" class="hidden mt-4 p-4 border border-cyan-800 bg-cyan-900/20">
-                <div class="text-cyan-400 font-bold mb-2">>> INITIATING DECRYPTION PROTOCOL...</div>
-                <div id="decryption-progress" class="text-cyan-200 text-sm font-mono whitespace-pre-wrap"></div>
+            <div id="decryption-ui" class="hidden mt-4 p-3 md:p-4 border border-cyan-800 bg-cyan-900/20">
+                <div class="text-cyan-400 font-bold mb-2 text-sm md:text-base">>> INITIATING DECRYPTION PROTOCOL...</div>
+                <div id="decryption-progress" class="text-cyan-200 text-[10px] md:text-sm font-mono whitespace-pre-wrap"></div>
             </div>
         </div>
 
         <!-- ANTI-CHEAT SCREEN (Màn hình Phạt mới) -->
-        <div id="anti-cheat-screen" class="hidden flex-grow flex flex-col items-center justify-center text-center mt-4">
-            <h1 class="text-4xl md:text-6xl text-red-600 hacker-title mb-6 glitch-effect" style="text-shadow: 0 0 20px red;">PHÁT HIỆN GIAN LẬN!</h1>
-            <p id="anti-cheat-reason" class="text-xl md:text-2xl text-red-400 mb-8 font-bold uppercase"></p>
-            <p class="text-md text-gray-400 mb-8 leading-relaxed">HỆ THỐNG GHI NHẬN HÀNH VI THOÁT KHỎI KHÔNG GIAN BẢO MẬT.<br>NGHI NGỜ BẠN SỬ DỤNG AI HOẶC TÀI LIỆU BÊN NGOÀI.<br>KẾT NỐI ĐÃ BỊ CHẶN VĨNH VIỄN BỞI FIREWALL.</p>
-            <button onclick="exitFullscreenAndReload()" class="btn mt-8 text-red-500 border-red-500 hover:bg-red-500 hover:text-black px-8 py-4 text-xl">CHẤP NHẬN HÌNH PHẠT & THỬ LẠI</button>
+        <div id="anti-cheat-screen" class="hidden flex-grow flex flex-col items-center justify-center text-center mt-4 p-2">
+            <h1 class="text-3xl md:text-6xl text-red-600 hacker-title mb-4 md:mb-6 glitch-effect" style="text-shadow: 0 0 20px red;">PHÁT HIỆN<br class="block md:hidden"> GIAN LẬN!</h1>
+            <p id="anti-cheat-reason" class="text-lg md:text-2xl text-red-400 mb-6 md:mb-8 font-bold uppercase"></p>
+            <p class="text-sm md:text-md text-gray-400 mb-8 leading-relaxed">HỆ THỐNG GHI NHẬN HÀNH VI THOÁT KHỎI KHÔNG GIAN BẢO MẬT.<br>NGHI NGỜ BẠN SỬ DỤNG AI HOẶC TÀI LIỆU BÊN NGOÀI.<br>KẾT NỐI ĐÃ BỊ CHẶN VĨNH VIỄN BỞI FIREWALL.</p>
+            <button onclick="exitFullscreenAndReload()" class="btn mt-4 text-red-500 border-red-500 hover:bg-red-500 hover:text-black px-6 py-3 md:px-8 md:py-4 text-base md:text-xl w-full sm:w-auto">CHẤP NHẬN HÌNH PHẠT & THỬ LẠI</button>
         </div>
 
         <!-- INPUT SECTION -->
         <div id="input-section" class="input-group hidden">
-            <span class="input-prefix" id="cli-prefix">root@interpol:~# </span>
-            <input type="text" id="passcode-input" autocomplete="off" spellcheck="false" placeholder="Nhập mã giải mã...">
-            <button onclick="checkAnswer()" class="btn ml-4">THỰC THI</button>
+            <!-- Giấu bớt tiền tố dài trên điện thoại nhỏ -->
+            <span class="input-prefix text-sm md:text-base" id="cli-prefix"><span class="hidden sm:inline">root@</span>interpol:~# </span>
+            <input type="text" id="passcode-input" autocomplete="off" spellcheck="false" placeholder="Nhập mã...">
+            <button onclick="checkAnswer()" class="btn w-full sm:w-auto mt-2 sm:mt-0">THỰC THI</button>
         </div>
         
         <!-- LOGIN SECTION -->
         <div id="login-section" class="input-group hidden">
-            <span class="input-prefix">ID_ĐĂNG_NHẬP: </span>
-            <input type="text" id="login-input" autocomplete="off" spellcheck="false" placeholder="Nhập Tên hoặc Mã Admin...">
-            <button onclick="handleLogin()" class="btn ml-4">XÁC NHẬN</button>
+            <span class="input-prefix text-sm md:text-base">ID: </span>
+            <input type="text" id="login-input" autocomplete="off" spellcheck="false" placeholder="Nhập Tên/Mã Admin...">
+            <button onclick="handleLogin()" class="btn w-full sm:w-auto mt-2 sm:mt-0">XÁC NHẬN</button>
         </div>
 
         <!-- ACTION BUTTONS -->
         <div id="action-section" class="mt-8 text-center hidden">
-            <button onclick="startGame()" class="btn px-10 py-4 text-xl">XÂM NHẬP HỆ THỐNG</button>
+            <button onclick="startGame()" class="btn px-6 py-3 md:px-10 md:py-4 text-base md:text-xl w-full sm:w-auto">XÂM NHẬP HỆ THỐNG</button>
         </div>
     </div>
 
@@ -394,7 +405,7 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
         let isTyping = false;
         let isAdmin = false;
         let currentUser = "";
-        const ADMIN_CODE = "OMEGA_ROOT";
+        const ADMIN_CODE = "PN_HACK";
         let gameState = 'MENU'; // Trạng thái game: MENU, PLAYING, END
         
         const textContent = document.getElementById('text-content');
@@ -466,7 +477,8 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
                 currentUser = inputVal;
             }
 
-            cliPrefix.innerText = `${currentUser}@interpol:~# `;
+            // Đổi prefix cho mobile
+            cliPrefix.innerHTML = `<span class="hidden sm:inline">${currentUser}@</span>interpol:~# `;
             statusText.innerText = `AUTHENTICATED`;
             showPrologue();
         }
@@ -494,7 +506,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             actionSection.classList.add('hidden');
             document.body.classList.remove('crt-flicker'); 
             
-            // Ép toàn màn hình để khóa người chơi (Đã thêm xử lý lỗi Promise)
             try {
                 let fsPromise = null;
                 if (document.documentElement.requestFullscreen) {
@@ -505,7 +516,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
                     fsPromise = document.documentElement.msRequestFullscreen();
                 }
                 
-                // Bắt lỗi nếu trình duyệt chặn Fullscreen API (Vd: chạy trong iframe)
                 if (fsPromise !== undefined && fsPromise !== null && fsPromise.catch) {
                     fsPromise.catch(err => console.warn("Tính năng Toàn màn hình bị chặn bởi trình duyệt, game vẫn tiếp tục."));
                 }
@@ -516,7 +526,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
         }
 
         function loadLevel(index) {
-            // Reset thời gian 3 phút cho mỗi câu hỏi
             timeLeft = 180;
             updateTimerUI();
             
@@ -545,7 +554,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
                 statusText.innerText = `AWAITING DECRYPTION`;
                 statusText.className = "text-cyan-400";
                 
-                // Bắt đầu đếm ngược ngay khi in xong đề bài
                 startTimer();
             });
         }
@@ -566,7 +574,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             inputSection.classList.add('hidden');
             hintContainer.classList.add('hidden');
             
-            // TẠM DỪNG ĐỒNG HỒ TRONG LÚC MÁY TÍNH XỬ LÝ
             stopTimer();
             statusText.innerText = `DECRYPTING...`;
             statusText.className = "text-yellow-500 glitch-effect";
@@ -622,11 +629,11 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
                     setTimeout(() => {
                         currentLevelIndex++;
                         if (currentLevelIndex < LEVELS.length) {
-                            loadLevel(currentLevelIndex); // loadLevel sẽ cấp lại 3 phút & start timer
+                            loadLevel(currentLevelIndex); 
                         } else {
                             showVictory();
                         }
-                    }, 6000); // Cho người chơi 6 giây để đọc kỹ phần giải thích
+                    }, 6000); 
                 });
             } else {
                 // MẬT KHẨU SAI
@@ -646,7 +653,7 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
                         statusText.innerText = `AWAITING DECRYPTION`;
                         statusText.className = "text-cyan-400";
                         container.style.boxShadow = "none";
-                        if (gameState === 'PLAYING') startTimer(); // Phạt nhập sai, thời gian chạy tiếp
+                        if (gameState === 'PLAYING') startTimer(); 
                     }, 2000);
                 });
             }
@@ -664,8 +671,8 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             hintContainer.classList.add('hidden');
             decryptionUI.classList.add('hidden');
             
-            gameState = 'END'; // Kết thúc game
-            stopTimer(); // Dừng đồng hồ nếu chết do vi phạm luật
+            gameState = 'END'; 
+            stopTimer(); 
             
             let overText = `\n====================================================\n`;
             if (customReason) {
@@ -678,11 +685,10 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             overText += `====================================================\n`;
 
             typeWriter(overText, textContent, 30, () => {
-                feedbackMsg.innerHTML = `<button onclick="exitFullscreenAndReload()" class="btn mt-8 text-red-500 border-red-500 hover:bg-red-500 hover:text-black">THỬ LẠI CHIẾN DỊCH</button>`;
+                feedbackMsg.innerHTML = `<button onclick="exitFullscreenAndReload()" class="btn w-full sm:w-auto mt-8 text-red-500 border-red-500 hover:bg-red-500 hover:text-black">THỬ LẠI CHIẾN DỊCH</button>`;
             });
         }
 
-        // --- HÀM MỚI: HIỂN THỊ MÀN HÌNH PHẠT RÕ RÀNG ---
         function showAntiCheatScreen(reason) {
             stopAmbientBGM();
             playErrorSound();
@@ -691,7 +697,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             statusText.className = "text-term-red glitch-effect";
             container.style.boxShadow = "inset 0 0 150px rgba(255, 0, 60, 0.8)";
 
-            // Ẩn toàn bộ giao diện chơi game
             document.getElementById('output-screen').classList.add('hidden');
             inputSection.classList.add('hidden');
             hintContainer.classList.add('hidden');
@@ -700,7 +705,6 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             gameState = 'END'; 
             stopTimer(); 
             
-            // Bật màn hình cảnh báo cực lớn
             const antiCheatScreen = document.getElementById('anti-cheat-screen');
             document.getElementById('anti-cheat-reason').innerText = reason;
             antiCheatScreen.classList.remove('hidden');
@@ -714,7 +718,7 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             statusText.innerText = `MISSION ACCOMPLISHED`;
             statusText.className = "text-term-green";
             
-            gameState = 'END'; // Kết thúc game
+            gameState = 'END'; 
             
             let victoryText = `====================================================\n`;
             victoryText += `[+] KẾT NỐI THÀNH CÔNG VÀO MAINFRAME CỦA THE ARCHITECT\n`;
@@ -729,7 +733,7 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             hintContainer.classList.add('hidden');
             
             typeWriter(victoryText, textContent, 30, () => {
-                feedbackMsg.innerHTML = `<button onclick="exitFullscreenAndReload()" class="btn mt-8 text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-black">KHỞI ĐỘNG LẠI MÔ PHỎNG</button>`;
+                feedbackMsg.innerHTML = `<button onclick="exitFullscreenAndReload()" class="btn w-full sm:w-auto mt-8 text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-black">KHỞI ĐỘNG LẠI MÔ PHỎNG</button>`;
             });
         }
 
@@ -741,12 +745,8 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             }
         }
 
-        // === HỆ THỐNG CHỐNG GIAN LẬN (ANTI-CHEAT) ===
-        
-        // 1. Chặn click chuột phải
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // 2. Chặn bôi đen, copy
         document.addEventListener('copy', (e) => {
             if (gameState === 'PLAYING') {
                 e.preventDefault();
@@ -756,21 +756,18 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             }
         });
 
-        // 3. Phạt nếu chuyển Tab hoặc Ứng dụng (Tránh việc bật AI lên hỏi)
         document.addEventListener("visibilitychange", () => {
             if (document.hidden && gameState === 'PLAYING') {
                 showAntiCheatScreen(`BẠN ĐÃ CHUYỂN TAB HOẶC RỜI KHỎI TRÌNH DUYỆT!`);
             }
         });
 
-        // 4. Phạt nếu thoát chế độ Toàn màn hình
         document.addEventListener("fullscreenchange", () => {
             if (!document.fullscreenElement && gameState === 'PLAYING') {
                 showAntiCheatScreen(`BẠN ĐÃ THOÁT CHẾ ĐỘ TOÀN MÀN HÌNH!`);
             }
         });
 
-        // 5. Cảnh báo khi reload trang
         window.addEventListener('beforeunload', function (e) {
             if (gameState === 'PLAYING') {
                 e.preventDefault();
