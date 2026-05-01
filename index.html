@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Omega Cipher: Multidisciplinary Detective</title>
+    <title>The Omega Cipher: 12 Layers of Hell</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -14,165 +14,92 @@
             --term-dim: #008f11;
             --term-blue: #00f3ff;
             --term-yellow: #ffe600;
+            --term-purple: #b026ff;
         }
 
-        /* Đồng bộ 100% Font chữ Fira Code để hỗ trợ Tiếng Việt hoàn hảo */
-        * {
-            font-family: 'Fira Code', Consolas, 'Courier New', monospace !important;
-        }
+        * { font-family: 'Fira Code', Consolas, 'Courier New', monospace !important; }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color);
-            color: var(--term-green);
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none; /* Khóa bôi đen văn bản chống copy */
-            -webkit-user-select: none;
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color); color: var(--term-green);
+            overflow-x: hidden; display: flex; justify-content: center; align-items: center;
+            user-select: none; -webkit-user-select: none;
         }
 
-        /* Scanlines */
         body::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
+            content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
+            z-index: 2; background-size: 100% 2px, 3px 100%; pointer-events: none;
         }
 
         .crt-flicker { animation: flicker 0.15s infinite; }
-        @keyframes flicker {
-            0% { opacity: 0.95; }
-            50% { opacity: 1; }
-            100% { opacity: 0.98; }
-        }
+        @keyframes flicker { 0% { opacity: 0.95; } 50% { opacity: 1; } 100% { opacity: 0.98; } }
 
         .terminal-container {
-            width: 100%;
-            max-width: 800px;
-            height: 100vh;
-            max-height: 900px;
-            padding: 1rem; /* Mặc định cho Mobile */
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
+            width: 100%; max-width: 850px; height: 100vh; max-height: 950px;
+            padding: 1rem; position: relative; z-index: 10; display: flex; flex-direction: column;
             text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
         }
-        
-        /* Padding lớn hơn cho Desktop/Tablet */
-        @media (min-width: 768px) {
-            .terminal-container { padding: 2rem; }
-        }
+        @media (min-width: 768px) { .terminal-container { padding: 2rem; } }
 
-        .hacker-title {
-            font-weight: 700;
-            text-transform: uppercase;
-        }
+        .hacker-title { font-weight: 700; text-transform: uppercase; }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--term-dim); border-radius: 3px; }
 
-        .typewriter-text {
-            white-space: pre-wrap;
-            line-height: 1.6;
-        }
+        .typewriter-text { white-space: pre-wrap; line-height: 1.6; }
 
         .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background-color: var(--term-green);
-            vertical-align: middle;
-            animation: blink 1s step-end infinite;
+            display: inline-block; width: 10px; height: 1.2em; background-color: var(--term-green);
+            vertical-align: middle; animation: blink 1s step-end infinite;
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .input-group {
-            margin-top: auto;
-            display: flex;
-            flex-wrap: wrap; /* Cho phép rớt dòng trên đt cực nhỏ */
-            align-items: center;
-            border-top: 1px dashed var(--term-dim);
-            padding-top: 1rem;
-            gap: 0.5rem;
-            padding-bottom: 1rem;
+            margin-top: auto; display: flex; flex-wrap: wrap; align-items: center;
+            border-top: 1px dashed var(--term-dim); padding-top: 1rem; gap: 0.5rem; padding-bottom: 1rem;
         }
-
         .input-prefix { font-weight: bold; }
-
         input[type="text"] {
-            background: transparent;
-            border: none;
-            color: var(--term-green);
-            font-size: 1rem; /* Giữ chuẩn 1rem để iOS không tự động Zoom */
-            flex-grow: 1;
-            min-width: 150px;
-            outline: none;
-            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
-            text-transform: uppercase;
-            user-select: auto; /* Mở khóa bôi đen cho khu vực gõ phím */
-            -webkit-user-select: auto;
+            background: transparent; border: none; color: var(--term-green); font-size: 1rem;
+            flex-grow: 1; min-width: 150px; outline: none; text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+            text-transform: uppercase; user-select: auto; -webkit-user-select: auto;
         }
+
+        .input-prefix.admin-mode { color: var(--term-yellow); text-shadow: 0 0 8px rgba(255, 230, 0, 0.6); }
 
         .btn {
-            background: transparent;
-            border: 1px solid var(--term-green);
-            color: var(--bg-color);
-            background-color: var(--term-green);
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            font-weight: bold;
-            text-align: center;
+            background: transparent; border: 1px solid var(--term-green); color: var(--bg-color);
+            background-color: var(--term-green); padding: 0.5rem 1rem; cursor: pointer; transition: all 0.2s;
+            text-transform: uppercase; font-weight: bold; text-align: center;
         }
+        .btn:hover { background: var(--bg-color); color: var(--term-green); box-shadow: 0 0 15px var(--term-green); }
 
-        .btn:hover {
-            background: var(--bg-color);
-            color: var(--term-green);
-            box-shadow: 0 0 15px var(--term-green);
-        }
-
-        .btn-hint {
-            background: transparent;
-            border: 1px solid var(--term-blue);
-            color: var(--term-blue);
-            font-size: 0.8rem;
-            margin-top: 1rem;
-        }
+        .btn-hint { background: transparent; border: 1px solid var(--term-blue); color: var(--term-blue); font-size: 0.8rem; margin-top: 1rem; }
         .btn-hint:hover { background: var(--term-blue); color: var(--bg-color); }
 
         .error-text { color: var(--term-red); text-shadow: 0 0 5px rgba(255, 0, 60, 0.6); font-weight: bold; }
         .success-text { color: var(--term-blue); text-shadow: 0 0 5px rgba(0, 243, 255, 0.6); font-weight: bold; }
+        .warning-text { color: var(--term-yellow); text-shadow: 0 0 5px rgba(255, 230, 0, 0.6); font-weight: bold; }
         
         .hidden { display: none !important; }
         
         .glitch-effect { animation: glitch 0.2s linear infinite; }
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
+        @keyframes glitch { 0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) } }
 
-        /* Timer Styles */
         .timer-urgent { color: var(--term-red); animation: pulse 1s infinite; text-shadow: 0 0 10px rgba(255,0,60,0.8); }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* Cinematic Trailer Frame */
+        .cinematic-frame {
+            font-family: 'Courier New', Courier, monospace !important;
+            white-space: pre; line-height: 1.2; font-size: 0.8rem;
+            color: var(--term-blue); text-shadow: 0 0 8px var(--term-blue);
+            background: rgba(0, 40, 50, 0.3); padding: 1rem; border: 1px solid var(--term-blue);
+            width: 100%; overflow-x: auto; margin-bottom: 1rem; text-align: center;
+        }
+        @media (min-width: 768px) { .cinematic-frame { font-size: 1rem; } }
     </style>
 </head>
 <body class="crt-flicker">
@@ -180,38 +107,108 @@
     <div class="terminal-container" id="game-container">
         <!-- HEADER -->
         <div class="mb-4 border-b border-green-900 pb-2">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-start">
                 <h1 class="text-xl md:text-3xl hacker-title tracking-widest text-green-400">CIPHER_PROTOCOL</h1>
                 <div class="text-right">
                     <div class="text-[10px] md:text-xs text-green-600">THỜI GIAN KẾT NỐI</div>
                     <div id="timer-display" class="text-xl md:text-2xl hacker-title tracking-widest text-green-500">--:--</div>
+                    <div id="active-hacks-display" class="text-[10px] md:text-xs text-purple-500 font-bold mt-1 h-4"></div>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row justify-between text-[10px] sm:text-xs text-green-600 mt-2 gap-1">
-                <span>TARGET: THE ARCHITECT</span>
-                <span>STATUS: <span id="status-text">INITIALIZING...</span></span>
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end text-[10px] sm:text-xs text-green-600 mt-2 gap-2">
+                <div class="flex flex-col gap-1">
+                    <span>TARGET: THE ARCHITECT (<span id="level-counter">0/12</span>)</span>
+                    <span>STATUS: <span id="status-text">STANDBY...</span></span>
+                </div>
+                <button onclick="showManual()" class="border border-green-800 text-green-500 px-3 py-1 hover:bg-green-900/50 hover:text-green-300 transition-colors hidden" id="btn-manual">[ TÀI LIỆU LỆNH HACK ]</button>
             </div>
         </div>
 
         <!-- MAIN TERMINAL SCREEN -->
         <div id="output-screen" class="flex-grow overflow-y-auto pr-2 flex flex-col justify-start">
+            
+            <!-- INIT SECTION (TRAILER TRIGGER) -->
+            <div id="init-section" class="mt-20 text-center flex flex-col items-center justify-center">
+                <h1 class="text-4xl md:text-6xl text-green-500 hacker-title mb-4 glitch-effect">THE OMEGA CIPHER</h1>
+                <p class="text-gray-400 mb-12 font-mono text-sm md:text-base">MỘT TRẢI NGHIỆM BẢO MẬT TƯƠNG TÁC ĐIỆN ẢNH</p>
+                <button onclick="startTrailer()" class="btn px-8 py-4 text-xl border-2 border-green-500 hover:bg-green-500 hover:text-black transition-all shadow-[0_0_15px_rgba(0,255,65,0.3)]">[ KÍCH HOẠT KẾT NỐI ]</button>
+            </div>
+
+            <!-- CINEMATIC TRAILER UI -->
+            <div id="cinematic-ui" class="hidden">
+                <div class="text-cyan-400 text-xs md:text-sm mb-2 glitch-effect">> BẮT ĐẦU PHÁT LUỒNG TRUYỀN HÌNH ẢNH (VIDEO FEED)...</div>
+                <div id="cinematic-frame-content" class="cinematic-frame"></div>
+            </div>
+
             <div id="text-content" class="typewriter-text text-sm md:text-base"></div>
-            <div><span class="cursor" id="typing-cursor"></span></div>
+            <div><span class="cursor hidden" id="typing-cursor"></span></div>
             
             <div id="hint-container" class="hidden">
-                <button onclick="showHint()" class="btn btn-hint mt-4 w-full sm:w-auto">[ YÊU CẦU TRỢ GIÚP (HINT) ]</button>
+                <button id="btn-hint-main" onclick="showHintConfirm()" class="btn btn-hint mt-4 w-full sm:w-auto">[ YÊU CẦU TRỢ GIÚP TỪ TRUNG TÂM ]</button>
                 <div id="hint-text" class="text-cyan-400 text-sm mt-2 hidden italic border-l-2 border-cyan-500 pl-3"></div>
             </div>
 
             <div id="feedback-msg" class="text-sm md:text-lg mt-4"></div>
-            <!-- Decryption animation overlay -->
+            
             <div id="decryption-ui" class="hidden mt-4 p-3 md:p-4 border border-cyan-800 bg-cyan-900/20">
                 <div class="text-cyan-400 font-bold mb-2 text-sm md:text-base">>> INITIATING DECRYPTION PROTOCOL...</div>
                 <div id="decryption-progress" class="text-cyan-200 text-[10px] md:text-sm font-mono whitespace-pre-wrap"></div>
             </div>
         </div>
 
-        <!-- ANTI-CHEAT SCREEN (Màn hình Phạt mới) -->
+        <!-- CONFIRM MODAL FOR HINT -->
+        <div id="confirm-modal" class="hidden absolute inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="border-2 border-yellow-500 bg-gray-950 p-6 max-w-sm w-full text-center shadow-[0_0_30px_rgba(255,230,0,0.3)]">
+                <h2 class="text-2xl text-yellow-500 hacker-title mb-4 glitch-effect">CẢNH BÁO BẢO MẬT</h2>
+                <p class="text-gray-300 mb-6 font-mono text-sm leading-relaxed">
+                    Yêu cầu giải mã trợ giúp từ Trung tâm sẽ tiêu tốn băng thông và làm mất <span class="text-red-500 font-bold text-lg">60 GIÂY</span> thời gian kết nối của bạn.<br><br>Bạn có chấp nhận đánh đổi?
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-3">
+                    <button onclick="acceptHint()" class="btn text-yellow-500 border-yellow-500 hover:bg-yellow-500 hover:text-black">XÁC NHẬN (MẤT 60S)</button>
+                    <button onclick="closeConfirmModal()" class="btn text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-black">TỪ CHỐI</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MANUAL MODAL -->
+        <div id="manual-modal" class="hidden absolute inset-0 bg-black/95 z-[60] flex items-center justify-center p-4 backdrop-blur-md">
+            <div class="border-2 border-cyan-600 bg-gray-950 p-4 md:p-6 max-w-2xl w-full shadow-[0_0_40px_rgba(0,243,255,0.2)] max-h-[85vh] overflow-y-auto flex flex-col">
+                <h2 class="text-xl md:text-2xl text-cyan-400 hacker-title mb-4 text-center border-b border-cyan-900 pb-2">HỒ SƠ HỆ THỐNG (MANUAL)</h2>
+                <div class="text-gray-300 text-xs md:text-sm font-mono leading-relaxed space-y-5 overflow-y-auto pr-2">
+                    <div>
+                        <h3 class="text-term-green font-bold mb-2">> 1. NGUYÊN TẮC CHIẾN DỊCH</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-400">
+                            <li>Thời gian để giải mã mỗi Tường Lửa là <span class="text-white">180 Giây (3 Phút)</span>. Đừng để đồng hồ về 0.</li>
+                            <li><span class="text-term-red">HÌNH PHẠT:</span> Nhập sai đáp án, thời gian trừ lũy thừa bậc 3 (Trừ 3s, 9s, 27s, 81s...).</li>
+                            <li>Bạn có thể đánh đổi <span class="text-term-yellow">60 Giây</span> để lấy 1 Gợi ý.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-red-500 font-bold mb-2">> 2. HỆ THỐNG ANTI-CHEAT</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-400">
+                            <li><span class="text-white font-bold">NGHIÊM CẤM:</span> Bôi đen, Copy, Mở Thẻ (Tab) mới, Thu nhỏ, Thoát Toàn Màn Hình.</li>
+                            <li>Vi phạm sẽ kích hoạt Firewall, Ngắt kết nối -> <span class="text-term-red">GAME OVER</span>.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-term-purple font-bold mb-2">> 3. MÃ LỆNH HACK (OVR_CMD)</h3>
+                        <p class="text-gray-500 italic mb-2">Nhập trực tiếp các mã dưới đây vào thanh lệnh. <br><span id="manual-hack-limit" class="text-yellow-400 font-bold"></span></p>
+                        <div class="bg-gray-900 border border-gray-700 p-3 space-y-3">
+                            <div><code class="text-term-purple font-bold text-sm">OVR_TIME_ADD</code><br><span class="text-gray-400">Bơm thêm 180 giây vào đồng hồ.</span></div>
+                            <div><code class="text-term-purple font-bold text-sm">OVR_FREEZE</code><br><span class="text-gray-400">Đóng băng đếm ngược thời gian trong vòng 30 Giây.</span></div>
+                            <div><code class="text-term-purple font-bold text-sm">OVR_BYPASS</code><br><span class="text-gray-400">Vượt tường lửa, nhảy thẳng sang màn tiếp theo.</span></div>
+                            <div><code class="text-term-purple font-bold text-sm">OVR_GHOST</code><br><span class="text-gray-400">Tắt hệ thống Anti-Cheat trong 45 Giây. Mở khóa Copy, chuyển Tab.</span></div>
+                            <div><code class="text-term-purple font-bold text-sm">OVR_REVEAL</code><br><span class="text-gray-400">Hệ thống sẽ hiển thị trực tiếp đáp án của câu hỏi hiện tại.</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 text-center pt-4 border-t border-cyan-900 shrink-0">
+                    <button onclick="closeManual()" class="btn text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-black w-full sm:w-auto">ĐÃ HIỂU & ĐÓNG TÀI LIỆU</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANTI-CHEAT SCREEN -->
         <div id="anti-cheat-screen" class="hidden flex-grow flex flex-col items-center justify-center text-center mt-4 p-2">
             <h1 class="text-3xl md:text-6xl text-red-600 hacker-title mb-4 md:mb-6 glitch-effect" style="text-shadow: 0 0 20px red;">PHÁT HIỆN<br class="block md:hidden"> GIAN LẬN!</h1>
             <p id="anti-cheat-reason" class="text-lg md:text-2xl text-red-400 mb-6 md:mb-8 font-bold uppercase"></p>
@@ -221,16 +218,15 @@
 
         <!-- INPUT SECTION -->
         <div id="input-section" class="input-group hidden">
-            <!-- Giấu bớt tiền tố dài trên điện thoại nhỏ -->
-            <span class="input-prefix text-sm md:text-base" id="cli-prefix"><span class="hidden sm:inline">root@</span>interpol:~# </span>
-            <input type="text" id="passcode-input" autocomplete="off" spellcheck="false" placeholder="Nhập mã...">
+            <span class="input-prefix text-sm md:text-base" id="cli-prefix"></span>
+            <input type="text" id="passcode-input" autocomplete="off" spellcheck="false" placeholder="Nhập mã giải mã / Lệnh Hack...">
             <button onclick="checkAnswer()" class="btn w-full sm:w-auto mt-2 sm:mt-0">THỰC THI</button>
         </div>
         
         <!-- LOGIN SECTION -->
         <div id="login-section" class="input-group hidden">
             <span class="input-prefix text-sm md:text-base">ID: </span>
-            <input type="text" id="login-input" autocomplete="off" spellcheck="false" placeholder="Nhập Tên/Mã Admin...">
+            <input type="text" id="login-input" autocomplete="off" spellcheck="false" placeholder="Nhập ID Đặc vụ...">
             <button onclick="handleLogin()" class="btn w-full sm:w-auto mt-2 sm:mt-0">XÁC NHẬN</button>
         </div>
 
@@ -241,7 +237,7 @@
     </div>
 
     <script>
-        // === AUDIO SYSTEM (Web Audio API) ===
+        // === AUDIO SYSTEM ===
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let bgmOsc, bgmLfo, bgmFilter, bgmGain;
 
@@ -261,8 +257,7 @@
 
         function playTypeSound() { playBeep(Math.random() * 200 + 400, 'square', 0.05, 0.02); }
         function playSuccessSound() { 
-            playBeep(600, 'sine', 0.1, 0.1); 
-            setTimeout(() => playBeep(800, 'sine', 0.3, 0.1), 100); 
+            playBeep(600, 'sine', 0.1, 0.1); setTimeout(() => playBeep(800, 'sine', 0.3, 0.1), 100); 
         }
         function playErrorSound() { playBeep(150, 'sawtooth', 0.5, 0.1); }
         function playAlertSound() { playBeep(900, 'square', 0.2, 0.05); }
@@ -271,30 +266,15 @@
             if(audioCtx.state === 'suspended') audioCtx.resume();
             if(bgmOsc) return; 
 
-            bgmOsc = audioCtx.createOscillator();
-            bgmOsc.type = 'sawtooth';
-            bgmOsc.frequency.setValueAtTime(45, audioCtx.currentTime);
+            bgmOsc = audioCtx.createOscillator(); bgmOsc.type = 'sawtooth'; bgmOsc.frequency.setValueAtTime(45, audioCtx.currentTime);
+            bgmFilter = audioCtx.createBiquadFilter(); bgmFilter.type = 'lowpass'; bgmFilter.frequency.value = 200;
+            bgmLfo = audioCtx.createOscillator(); bgmLfo.frequency.value = 0.1; 
+            const lfoGain = audioCtx.createGain(); lfoGain.gain.value = 100;
+            bgmLfo.connect(lfoGain); lfoGain.connect(bgmFilter.frequency);
+            bgmGain = audioCtx.createGain(); bgmGain.gain.value = 0.05; 
 
-            bgmFilter = audioCtx.createBiquadFilter();
-            bgmFilter.type = 'lowpass';
-            bgmFilter.frequency.value = 200;
-
-            bgmLfo = audioCtx.createOscillator();
-            bgmLfo.frequency.value = 0.1; 
-            const lfoGain = audioCtx.createGain();
-            lfoGain.gain.value = 100;
-            bgmLfo.connect(lfoGain);
-            lfoGain.connect(bgmFilter.frequency);
-
-            bgmGain = audioCtx.createGain();
-            bgmGain.gain.value = 0.05; 
-
-            bgmOsc.connect(bgmFilter);
-            bgmFilter.connect(bgmGain);
-            bgmGain.connect(audioCtx.destination);
-            
-            bgmOsc.start();
-            bgmLfo.start();
+            bgmOsc.connect(bgmFilter); bgmFilter.connect(bgmGain); bgmGain.connect(audioCtx.destination);
+            bgmOsc.start(); bgmLfo.start();
         }
 
         function stopAmbientBGM() {
@@ -304,22 +284,32 @@
             }
         }
 
-        // === TIMER SYSTEM (3 PHÚT / CÂU HỎI) ===
-        let timeLeft = 180; // 3 phút = 180s
+        // === TIMER & TEMPORARY HACKS SYSTEM ===
+        let timeLeft = 180;
         let timerInterval = null;
         let isTimerRunning = false;
+        
+        let isTimerFrozen = false; 
+        let isGhostMode = false; 
+        let hackTimers = { freeze: 0, ghost: 0 }; 
+        
         const timerDisplay = document.getElementById('timer-display');
+        const activeHacksDisplay = document.getElementById('active-hacks-display');
 
         function updateTimerUI() {
             let m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
             let s = (timeLeft % 60).toString().padStart(2, '0');
-            timerDisplay.innerText = `${m}:${s}`;
-
-            if (timeLeft <= 60) {
-                timerDisplay.classList.add('timer-urgent');
-                if (timeLeft % 2 === 0 && isTimerRunning) playAlertSound(); 
+            
+            if (isTimerFrozen) {
+                timerDisplay.innerText = `${m}:${s} [FROZEN]`;
+                timerDisplay.className = "text-xl md:text-2xl hacker-title tracking-widest text-blue-400";
             } else {
-                timerDisplay.classList.remove('timer-urgent');
+                timerDisplay.innerText = `${m}:${s}`;
+                if (timeLeft <= 60 && timeLeft > 0) {
+                    timerDisplay.className = "text-xl md:text-2xl hacker-title tracking-widest timer-urgent";
+                } else {
+                    timerDisplay.className = "text-xl md:text-2xl hacker-title tracking-widest text-green-500";
+                }
             }
         }
 
@@ -327,13 +317,31 @@
             if(isTimerRunning) return;
             isTimerRunning = true;
             updateTimerUI();
+            
             timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerUI();
-                if (timeLeft <= 0) {
-                    stopTimer();
-                    showGameOver();
+                let activeHacksText = [];
+                if (hackTimers.freeze > 0) {
+                    hackTimers.freeze--;
+                    activeHacksText.push(`FREEZE: ${hackTimers.freeze}s`);
+                    if (hackTimers.freeze <= 0) isTimerFrozen = false;
                 }
+                if (hackTimers.ghost > 0) {
+                    hackTimers.ghost--;
+                    activeHacksText.push(`GHOST MODE: ${hackTimers.ghost}s`);
+                    if (hackTimers.ghost <= 0) isGhostMode = false;
+                }
+                
+                activeHacksDisplay.innerText = activeHacksText.join(' | ');
+
+                if (!isTimerFrozen) {
+                    timeLeft--;
+                    updateTimerUI();
+                    if (timeLeft <= 60 && timeLeft > 0 && timeLeft % 2 === 0) playAlertSound();
+                    
+                    if (timeLeft <= 0) {
+                        stopTimer(); showGameOver();
+                    }
+                } else { updateTimerUI(); }
             }, 1000);
         }
 
@@ -342,62 +350,115 @@
             clearInterval(timerInterval);
         }
 
-        // === BỘ CÂU HỎI "CHỐNG AI" ===
+        // === CINEMATIC FRAMES (Video/Comic Feed) ===
+        const CINEMATICS = {
+            radar: [
+                "[ SCANNING SECTOR ]\n      .  \n       . \n     .   .",
+                "[ SCANNING SECTOR ]\n      .  \n   -- O --\n     .   .",
+                "[ TARGET ACQUIRED ]\n    \\ | / \n   -  O  -\n    / | \\ "
+            ],
+            lock: [
+                "[ FIREWALL DETECTED ]\n   .----.  \n  /      \\ \n  |      | ",
+                "[ SYSTEM LOCKED ]\n   .----.  \n  /      \\ \n |[====]| ",
+                "[ KEY REQUIRED ]\n   .----.  \n  /      \\ \n |[ ** ]| "
+            ],
+            bio: [
+                "[ BIO-SCAN INIT ]\n   \\\\-//   \n   //-\\\\   \n   \\\\-//   ",
+                "[ ANALYZING DNA ]\n   //-\\\\   \n   \\\\-//   \n   //-\\\\   ",
+                "[ MATCH FOUND ]\n   \\\\=//   \n   //=//   \n   \\\\=//   "
+            ],
+            space: [
+                "[ SAT-LINK ESTABLISHED ]\n      \\ /      \n    ---O---    \n      / \\      ",
+                "[ ALIGNING ORBIT ]\n     \\ | /     \n    -- O --    \n     / | \\     ",
+                "[ CONNECTION STABLE ]\n    \\\\ | //    \n   === O ===   \n    // | \\\\    "
+            ]
+        };
+
+        // === 12 CÂU ĐỐ BẪY TƯ DUY (KỊCH BẢN MỚI TỪNG VÒNG) ===
         const LEVELS = [
             {
-                target: "SERVER BẮC Á - BẪY THỊ GIÁC",
-                story: "LƯU Ý: KIẾN TRÚC SƯ ĐANG DÙNG CÁC NGHỊCH LÝ ĐỂ ĐÁNH LỪA MÁY HỌC (MACHINE LEARNING). ĐỪNG TƯ DUY NHƯ MỘT CÁI MÁY, HÃY DÙNG TRỰC GIÁC CỦA BẠN.",
-                riddle: `[ KHÓA BẢO MẬT LAYER 1 - QUY LUẬT HÌNH THÁI ]
-Hệ thống bảo vệ phân tích 'khoảng không bị giam giữ' (vòng khép kín) trong các dữ liệu.
-- Mẫu 8809 báo cáo: 6
-- Mẫu 7111 báo cáo: 0
-- Mẫu 2172 báo cáo: 0
-- Mẫu 6666 báo cáo: 4
-
-Dựa vào quy luật trên, mã số để mở cổng 809681 là bao nhiêu?`,
-                hint: "Gợi ý: Trí tuệ nhân tạo (AI) sẽ cố tìm quy luật toán học (cộng trừ nhân chia). Nhưng con người có thể nhìn thấy HÌNH DÁNG của chữ số. Số 8 có mấy vòng tròn kín?",
-                answer: "7", 
-                explanation: "> Số 8 có 2 vòng kín, số 0, 6, 9 có 1 vòng. Các số khác không có vòng kín.\n> Chuỗi 809681: (8->2) + (0->1) + (9->1) + (6->1) + (8->2) + (1->0) = 7."
+                target: "LAYER 1 - LOGIC NGÔN NGỮ", frames: CINEMATICS.radar,
+                story: `[ GHI ÂM TÍN HIỆU: THE ARCHITECT ]\n<span class="text-term-yellow">"Interpol à? Bọn mọt sách các người cử một tay mơ đến để cản ta sao? Thử xem trực giác của con người hay tư duy máy móc sẽ thắng."</span>\n> Tín hiệu bị cắt đứt. Cổng bảo mật đầu tiên hiện ra.`,
+                riddle: `[ KHÓA BẢO MẬT ]\nĐiền chữ cái tiếp theo vào dãy sau:\nM, H, B, B, N, S, B, T, C, ?`,
+                hint: "Đếm từ 1 đến 10 bằng Tiếng Việt và chú ý chữ cái đầu tiên.",
+                answer: "M", explanation: "> Một(M), Hai(H), Ba(B), Bốn(B), Năm(N), Sáu(S), Bảy(B), Tám(T), Chín(C), Mười(M).\n> Đáp án: M"
             },
             {
-                target: "SERVER CHÂU ÂU - BẪY THỜI GIAN THỰC",
-                story: "BẠN ĐÃ VƯỢT QUA LAYER 1. TUY NHIÊN, TƯỜNG LỬA NÀY ĐƯỢC THIẾT KẾ ĐỂ ĐÁNH LỪA THUẬT TOÁN BẰNG NGHỊCH LÝ VỀ ĐÍCH.",
-                riddle: `[ KHÓA BẢO MẬT LAYER 2 - BÀI TOÁN LEO TƯỜNG ]
-Một mã độc (bot) cần leo lên một Tường Lửa bảo mật cao đúng 20 LỚP.
-- Ban ngày: Thuật toán giúp nó vượt qua được 5 LỚP.
-- Ban đêm: Phần mềm diệt virus của hệ thống đẩy nó lùi xuống 4 LỚP.
-
-Hỏi: Mất chính xác bao nhiêu ngày để mã độc này chạm tới ĐỈNH của tường lửa lần đầu tiên? (Nhập một con số)`,
-                hint: "Gợi ý: Đừng vội vàng lấy 20 chia cho 1. Hãy thử nhẩm xem ở đầu ngày thứ 15, nó đã leo được ở lớp thứ mấy? Và nội trong ngày hôm sau (chưa tới đêm), nó có thể vọt lên đỉnh được không?",
-                answer: "16",
-                explanation: "> Mỗi chu kỳ ngày/đêm (24h), mã độc leo được: 5 - 4 = 1 Lớp.\n> Sau 15 ngày và đêm, nó ở Lớp 15.\n> Sang ngày thứ 16 (ban ngày), nó tiến thêm 5 Lớp (15 + 5 = 20) và ĐÃ CHẠM ĐỈNH trước khi màn đêm buông xuống chặn lại."
+                target: "LAYER 2 - GÓC KHÔNG GIAN THỜI GIAN", frames: CINEMATICS.lock,
+                story: `[ BÁO CÁO TỪ ĐỘI ĐẶC NHIỆM ]\n> "Chúng tôi đang bao vây cứ điểm ở Châu Âu, nhưng cửa khóa từ tính. Hắn đang câu giờ!"\nGiọng The Architect vang lên qua loa: <span class="text-term-yellow">"Thời gian là ảo giác. Bọn chúng nghĩ cứ đếm là sẽ đến đích ư?"</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nĐồng hồ đang chỉ chính xác 3 giờ 15 phút.\nGóc tạo bởi kim giờ và kim phút lúc này là bao nhiêu độ? (Nhập số thập phân, ví dụ: 12.5)`,
+                hint: "Lúc 3h15, kim phút chỉ số 3, nhưng kim giờ đã nhích đi một phần tư quãng đường từ số 3 đến số 4.",
+                answer: "7.5", explanation: "> Kim phút ở vị trí 90 độ.\n> Kim giờ ở vị trí 90 độ + (15/60)*30 độ = 97.5 độ.\n> Khoảng cách: 97.5 - 90 = 7.5 độ."
             },
             {
-                target: "SERVER CHÍNH - BẪY SINH HỌC CẤU TRÚC",
-                story: "HỆ THỐNG ĐÃ KÍCH HOẠT LỚP PHÒNG NGỰ PHÂN TỬ. CÁC AI THÔNG THƯỜNG KHÔNG THỂ LƯỢNG HÓA ĐƯỢC CẤU TRÚC VẬT LÝ VÀ SẼ TRẢ VỀ LỖI.",
-                riddle: `[ KHÓA BẢO MẬT LAYER 3 - LIÊN KẾT DNA ]
-Cho một nửa chuỗi DNA gốc là: A - T - G - C - C - A
-Biết rằng, mỗi khi bẻ gãy một "Liên kết Hydro" nối giữa các cặp bazơ tương ứng (với mạch bổ sung của nó), hệ thống sẽ tạo ra 1 đơn vị năng lượng.
-
-Kẻ thù đã bẻ gãy toàn bộ chuỗi DNA hai mạch này. Tổng số đơn vị năng lượng giải phóng là bao nhiêu?`,
-                hint: "Gợi ý: Hãy nhớ lại kiến thức Sinh học cấp 3. Adenin (A) liên kết với Thymin (T) bằng mấy liên kết Hydro? Guanin (G) liên kết với Xitôzin (C) bằng mấy liên kết?",
-                answer: "15",
-                explanation: "> Liên kết Hydro giữa các cặp bazơ: A=T (2 liên kết), G≡C (3 liên kết).\n> Cấu trúc mạch: A-T (2) | T-A (2) | G-C (3) | C-G (3) | C-G (3) | A-T (2).\n> Tổng năng lượng bẻ gãy: 2 + 2 + 3 + 3 + 3 + 2 = 15."
+                target: "LAYER 3 - NGHỊCH LÝ ĐỊNH LƯỢNG", frames: CINEMATICS.space,
+                story: `[ CẢNH BÁO BĂNG THÔNG DỮ LIỆU ]\n> Hệ thống đang bị dội ngược dữ liệu. Hắn tạo ra một vòng lặp xác suất vô tận.\nĐội trưởng hét lên: <span class="text-term-blue">"Rút phích cắm đi!"</span>\n<span class="text-term-green">"Không! Rút ra là toàn bộ vệ tinh sẽ rụng,"</span> bạn đáp. Chỉ có cách giải nghịch lý này để thoát khỏi vòng lặp.`,
+                riddle: `[ KHÓA BẢO MẬT ]\nMột trang trại có 100 con gà, trong đó 99% là gà mái.\nBạn phải bán đi đúng bao nhiêu con gà mái để tỷ lệ gà mái trong đàn giảm xuống còn chính xác 98%?`,
+                hint: "Đừng tính theo kiểu 100-1=99. Hãy tư duy từ số lượng con Gà Trống (hiện tại là 1 con, chiếm 1%). Để 1 con gà trống này chiếm 2% tổng đàn, thì tổng đàn phải là bao nhiêu con?",
+                answer: "50", explanation: "> 100 con -> 99 mái, 1 trống (1 trống = 1%).\n> Để mái 98% -> Trống 2%. Mà số lượng trống không đổi = 1 con.\n> 1 con = 2% tổng đàn -> Tổng đàn mới = 50 con.\n> Phải bán: 100 - 50 = 50 con mái."
             },
             {
-                target: "MAINFRAME THE ARCHITECT - NGHỊCH LÝ ĐỆ QUY",
-                story: "BÁO ĐỘNG ĐỎ! MÁY CHỦ LÕI LÀ MỘT NGHỊCH LÝ TỰ THAM CHIẾU (SELF-REFERENTIAL). ĐÂY LÀ KHẮC TINH CỦA MỌI TRÍ TUỆ NHÂN TẠO.",
-                riddle: `[ MA TRẬN CUỐI CÙNG - MẬT MÃ TỰ MÔ TẢ ]
-Mật mã là một số nguyên có đúng 4 CHỮ SỐ (ABCD). Hãy tìm mật mã biết:
-- Chữ số thứ nhất (A) bằng TỔNG SỐ LƯỢNG chữ số "0" có trong toàn bộ mật mã.
-- Chữ số thứ hai (B) bằng TỔNG SỐ LƯỢNG chữ số "1" có trong toàn bộ mật mã.
-- Chữ số thứ ba (C) bằng TỔNG SỐ LƯỢNG chữ số "2" có trong toàn bộ mật mã.
-- Chữ số thứ tư (D) bằng TỔNG SỐ LƯỢNG chữ số "3" có trong toàn bộ mật mã.
-
-Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật mã là gì?`,
-                hint: "Gợi ý: Bài này dùng phương pháp Thử-Sai (Trial & Error). Vì A là số lẻ > 0 (nên có thể là 1 hoặc 3). Giả sử A=1, tức là trong 4 chữ số chỉ có MỘT số 0. Hãy thử lắp ghép tiếp.",
-                answer: "1210",
-                explanation: "> Ta có mã 1210:\n> (A=1) Trùng khớp vì có 1 chữ số 0.\n> (B=2) Trùng khớp vì có 2 chữ số 1.\n> (C=1) Trùng khớp vì có 1 chữ số 2.\n> (D=0) Trùng khớp vì không có chữ số 3 nào.\n> Đây là chuỗi thỏa mãn hoàn toàn nghịch lý đệ quy tự tham chiếu."
+                target: "LAYER 4 - HỆ QUY CHIẾU VẬT LÝ", frames: CINEMATICS.radar,
+                story: `[ LỖI MÔ PHỎNG VẬT LÝ ]\n> Các máy tính AI của Interpol liên tục trả về kết quả lỗi do quên mất hệ quy chiếu thực tế.\n<span class="text-term-yellow">"Máy móc chỉ biết nhai lại số liệu mà tao mớm cho chúng. Đồ ngốc."</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nMột chiếc thuyền thả neo ngoài biển, một chiếc thang dây thòng xuống nước. Khoảng cách giữa 2 bậc thang là 20cm.\nThủy triều đang dâng lên với tốc độ 10cm/giờ.\nHỏi sau 2 giờ, nước biển sẽ ngập lên thêm mấy bậc thang dây?`,
+                hint: "Thang dây được treo vào thuyền. Khi nước biển dâng lên thì chuyện gì xảy ra với chiếc thuyền?",
+                answer: "0", explanation: "> Thuyền nổi trên mặt nước. Nước dâng thì thuyền dâng theo.\n> Mực nước so với bậc thang không bao giờ thay đổi.\n> Đáp án: 0 bậc."
+            },
+            {
+                target: "LAYER 5 - LÝ THUYẾT VỊ TRÍ", frames: CINEMATICS.lock,
+                story: `[ TƯỜNG LỬA CHUYỂN DỊCH ]\n> The Architect đang liên tục thay đổi vị trí cổng mạng (Port) để gây nhiễu mã độc bẻ khóa của chúng ta.\n<span class="text-term-blue">"Đặc vụ, định vị lại mục tiêu lập tức! Chúng ta đang mất dấu hắn!"</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nTrong một cuộc chạy đua marathon, nếu bạn bứt tốc và vượt qua người đang chạy ở vị trí thứ nhì.\nVậy hiện tại bạn đang ở vị trí thứ mấy? (Nhập số)`,
+                hint: "Bạn chiếm lấy vị trí của người mà bạn vừa vượt qua.",
+                answer: "2", explanation: "> Bạn vượt người thứ nhì, bạn sẽ lấy vị trí của người đó.\n> Bạn trở thành người thứ nhì (2)."
+            },
+            {
+                target: "LAYER 6 - PHÂN TÍCH HÀNH VI", frames: CINEMATICS.bio,
+                story: `[ PHÂN KHU TÂM LÝ HỌC HÀNH VI ]\n> Hắn đang tiến hành phân tích khuôn mẫu hành vi của con người. Nếu hệ thống quét không ra sự logic, nó sẽ tự hủy toàn bộ cơ sở dữ liệu.\n<span class="text-term-yellow">"Để xem bộ não sinh học của ngươi có linh hoạt hơn các thuật toán rập khuôn không."</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nMột người câm muốn mua bàn chải, anh ta dùng tay làm động tác đánh răng.\nVậy một người MÙ muốn mua chiếc kính mát thì anh ta phải làm gì?\n(Nhập 1 chữ cái không dấu hoặc có dấu tiếng Việt)`,
+                hint: "Người mù mất thị giác chứ không mất khả năng ngôn ngữ.",
+                answer: "NOI", explanation: "> Người mù hoàn toàn có thể mở miệng ra NÓI (NOI).\n> AI thường suy luận rập khuôn theo việc dùng hành động tay."
+            },
+            {
+                target: "LAYER 7 - TƯ DUY KHÔNG GIAN 3D", frames: CINEMATICS.space,
+                story: `[ KHÔNG GIAN ĐA CHIỀU KÍCH HOẠT ]\n> Phần lớn máy tính AI đang dùng để giải mã xử lý dữ liệu trên mặt phẳng 2D. Đây là một bài kiểm tra không gian 3 chiều để ép cháy Card Đồ họa của chúng ta.\n<span class="text-term-blue">"Nhiệt độ GPU đang ở mức 98 độ C! Nó sắp nổ rồi!"</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nĐể cắt một chiếc bánh kem hình trụ thành đúng 8 phần bằng nhau, bạn chỉ được cắt đúng 3 nhát dao thẳng.\n2 nhát đầu bạn cắt chéo hình chữ thập từ trên xuống (chia thành 4 phần).\nNhát dao thứ 3 bạn phải cắt theo hướng nào? (Nhập chữ tiếng Việt)`,
+                hint: "Nhát dao thứ 3 không cắt từ trên xuống nữa. Hãy cắt song song với mặt bàn.",
+                answer: "NGANG", explanation: "> 2 nhát chữ thập chia bánh thành 4 phần dọc.\n> Nhát cắt NGANG xẻ đôi thân bánh trụ sẽ nhân đôi 4 phần dọc thành 8 phần."
+            },
+            {
+                target: "LAYER 8 - DI SẢN NHÂN LOẠI", frames: CINEMATICS.lock,
+                story: `[ PHÂN HỆ LƯU TRỮ VĂN HÓA LỊCH SỬ ]\n> Hắn đang tiến hành xóa bỏ các bản lưu trữ kỹ thuật số của các kiệt tác nghệ thuật thế giới. Một đòn tấn công vào di sản loài người.\n<span class="text-term-yellow">"Nghệ thuật là thứ máy móc không thể hiểu, và cũng là thứ con người dễ quên lãng nhất."</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nKiệt tác hội họa Nàng Mona Lisa của Leonardo da Vinci hoàn toàn KHÔNG CÓ bộ phận nào trên khuôn mặt?\n(Nhập tiếng Việt không dấu, viết liền)`,
+                hint: "Bộ phận này nằm ở nửa trên của khuôn mặt, phía trên đôi mắt.",
+                answer: "LONGMAY", explanation: "> Bức tranh gốc Nàng Mona Lisa không hề có LÔNG MÀY (LONGMAY)."
+            },
+            {
+                target: "LAYER 9 - HÓA HỌC PHÂN TỬ", frames: CINEMATICS.bio,
+                story: `[ MÔ PHỎNG LÒ PHẢN ỨNG NĂNG LƯỢNG ]\n> CẢNH BÁO NGUY HIỂM! Hắn đã can thiệp vào cảm biến trộn nhiên liệu làm mát.\nAI đang liên tục tính toán sai thể tích vì các định luật vĩ mô không còn đúng ở cấp độ phân tử. Nếu không nhập đúng thông số, lò phản ứng ảo sẽ nổ tung!`,
+                riddle: `[ KHÓA BẢO MẬT ]\nTrộn đúng 1 Lít nước (H2O) tinh khiết vào 1 Lít Cồn (Ethanol) nguyên chất.\nBỏ qua sự bay hơi, thể tích hỗn hợp thu được là LỚN HƠN, BẰNG hay NHỎ HƠN 2 Lít?\n(Nhập: LONHON, BANG, hoặc NHOHON)`,
+                hint: "Cấu trúc phân tử của nước và cồn có kích thước khác nhau. Các phân tử nhỏ có thể chui vào khoảng trống của các phân tử lớn.",
+                answer: "NHOHON", explanation: "> Thể tích sẽ NHỎ HƠN (NHOHON) 2 lít.\n> Hiện tượng xen phủ phân tử: Các phân tử nước chui vào khoảng trống giữa các phân tử cồn."
+            },
+            {
+                target: "LAYER 10 - NHIỆT ĐỘNG LỰC HỌC", frames: CINEMATICS.radar,
+                story: `[ TRUNG TÂM PHÂN PHỐI NĂNG LƯỢNG ]\n> Nhiệt độ hệ thống đang tăng dần. Hắn đang mô phỏng một vụ quá tải nhiệt động lực học để đánh sập nguồn điện chính.\n<span class="text-term-yellow">"Sự vĩnh cửu của kim cương hay sự tầm thường của than củi? Bản chất hay vẻ bề ngoài? Ngươi chọn cái nào sẽ thiêu rụi tất cả?"</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nKim cương và Than chì đều cấu tạo từ Carbon.\nNếu đem đốt cháy hoàn toàn 1 mol Kim cương và 1 mol Than chì trong cùng điều kiện, chất nào sẽ TỎA RA NHIỀU NHIỆT HƠN?\n(Nhập: KIMCUONG hoặc THANCHI)`,
+                hint: "Chất nào kém bền hơn về mặt nhiệt động học (mức năng lượng ban đầu cao hơn) thì khi cháy sẽ giải phóng nhiều nhiệt hơn để tụt xuống mức năng lượng CO2.",
+                answer: "KIMCUONG", explanation: "> KIM CƯƠNG (KIMCUONG) tỏa nhiều nhiệt hơn.\n> Than chì là trạng thái bền vững nhất của Carbon. Kim cương có nội năng cao hơn nên khi cháy tỏa nhiều nhiệt hơn."
+            },
+            {
+                target: "LAYER 11 - SỰ KIỆN LỊCH SỬ", frames: CINEMATICS.space,
+                story: `[ PHÒNG ĐIỀU KHIỂN QUỸ ĐẠO VỆ TINH ]\n> Chỉ còn cách Mainframe một bước. Vệ tinh quân sự đã bị hắn làm lệch quỹ đạo và đang chuẩn bị bắn tia EMP xuống các thành phố lớn.\n<span class="text-term-yellow">"Một cuộc chiến có thể kết thúc trong chớp mắt, nhưng hậu quả thì mãi mãi. Cứu lấy chúng đi."</span>`,
+                riddle: `[ KHÓA BẢO MẬT ]\nCuộc chiến tranh ngắn nhất trong lịch sử nhân loại (chiến tranh Anh - Zanzibar năm 1896) kéo dài chính xác bao nhiêu phút?`,
+                hint: "Dưới 40 phút.",
+                answer: "38", explanation: "> Cuộc chiến chỉ kéo dài đúng 38 phút trước khi Zanzibar đầu hàng."
+            },
+            {
+                target: "MAINFRAME LÕI - NGHỊCH LÝ ĐỆ QUY", frames: CINEMATICS.lock,
+                story: `[ TIẾP CẬN LÕI MAINFRAME CỦA THE ARCHITECT ]\n> Bóng tối bao trùm màn hình. The Architect xuất hiện qua camera:\n<span class="text-term-yellow">"Đặc vụ, ta ấn tượng đấy. Ngươi đã vượt qua mọi thứ... nhưng đây là cánh cửa cuối cùng. Một nghịch lý tự tham chiếu bất khả thi đối với máy móc."</span>\n> Tiếng chuông đếm ngược tự hủy bắt đầu vang lên dồn dập.`,
+                riddle: `[ MA TRẬN CUỐI CÙNG ]\nMật mã có 4 CHỮ SỐ (ABCD):\n- A bằng TỔNG SỐ chữ số "0" trong mật mã.\n- B bằng TỔNG SỐ chữ số "1" trong mật mã.\n- C bằng TỔNG SỐ chữ số "2" trong mật mã.\n- D bằng TỔNG SỐ chữ số "3" trong mật mã.\nBiết A > 0 và là SỐ LẺ. Mật mã là?`,
+                hint: "Nếu A=1 thì chỉ có một số 0. Bắt buộc số 0 đó phải nằm ở cuối cùng (D=0). Khởi đầu với 1_ _0.",
+                answer: "1210", explanation: "> 1210:\n> (A=1) Có 1 chữ số 0. (B=2) Có 2 chữ số 1. (C=1) Có 1 chữ số 2. (D=0) Có 0 chữ số 3."
             }
         ];
 
@@ -405,8 +466,11 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
         let isTyping = false;
         let isAdmin = false;
         let currentUser = "";
-        const ADMIN_CODE = "PN_HACK";
-        let gameState = 'MENU'; // Trạng thái game: MENU, PLAYING, END
+        let wrongAttempts = 0; 
+        
+        let hackUses = { "OVR_TIME_ADD": 0, "OVR_FREEZE": 0, "OVR_BYPASS": 0, "OVR_GHOST": 0, "OVR_REVEAL": 0 }; 
+        const ADMIN_CODE = "OMEGA_ROOT";
+        let gameState = 'MENU'; 
         
         const textContent = document.getElementById('text-content');
         const inputSection = document.getElementById('input-section');
@@ -422,42 +486,63 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
         const container = document.getElementById('game-container');
         const decryptionUI = document.getElementById('decryption-ui');
         const decryptionProgress = document.getElementById('decryption-progress');
+        const cinematicUI = document.getElementById('cinematic-ui');
+        const cinematicFrameContent = document.getElementById('cinematic-frame-content');
 
         function typeWriter(text, element, speed = 20, callback) {
             isTyping = true;
             element.innerHTML = '';
             let i = 0;
-            
-            function type() {
+            function typeHTML() {
+                if (text.charAt(i) === '<') {
+                    let htmlTag = "";
+                    while (text.charAt(i) !== '>' && i < text.length) { htmlTag += text.charAt(i); i++; }
+                    htmlTag += '>'; i++; element.innerHTML += htmlTag;
+                    typeHTML(); return;
+                }
                 if (i < text.length) {
                     if(i % 3 === 0) playTypeSound(); 
-                    
-                    if(text.charAt(i) === '\n') {
-                        element.innerHTML += '<br>';
-                    } else {
-                        element.innerHTML += text.charAt(i);
-                    }
+                    if(text.charAt(i) === '\n') { element.innerHTML += '<br>'; } 
+                    else { element.innerHTML += text.charAt(i); }
                     i++;
-                    
                     const outputScreen = document.getElementById('output-screen');
                     outputScreen.scrollTop = outputScreen.scrollHeight;
-                    
-                    setTimeout(type, speed);
+                    setTimeout(typeHTML, speed);
                 } else {
                     isTyping = false;
+                    document.getElementById('typing-cursor').classList.add('hidden');
                     if (callback) callback();
                 }
             }
-            type();
+            document.getElementById('typing-cursor').classList.remove('hidden');
+            typeHTML();
         }
 
-        function initSystem() {
-            statusText.innerText = `WAITING FOR LOGIN...`;
-            const welcomeText = `> HỆ THỐNG BẢO MẬT TỐI CAO - CIPHER_PROTOCOL v9.0\n> VUI LÒNG ĐĂNG NHẬP ĐỂ TIẾP TỤC.\n> (Nhập ID Đặc vụ. Nhập Mã Quản Trị nếu có)`;
+        function startTrailer() {
+            document.getElementById('init-section').classList.add('hidden');
+            startAmbientBGM(); 
             
-            typeWriter(welcomeText, textContent, 15, () => {
+            statusText.innerText = `ESTABLISHING UPLINK...`;
+            
+            let trailerText = `> [ KẾT NỐI VỆ TINH ĐÃ THIẾT LẬP ]\n`;
+            trailerText += `> NGÀY: 01/05/2026\n`;
+            trailerText += `> TRỤ SỞ BẢO MẬT KHÔNG GIAN MẠNG TOÀN CẦU (ICC).\n...\n`;
+            trailerText += `<span class="text-term-red">> [ BÁO ĐỘNG ĐỎ CẤP ĐỘ 5 ]</span>\n`;
+            trailerText += `> "The Architect" - Kẻ thù số một của an ninh mạng vừa chiếm quyền kiểm soát Lưới Điện Toàn Cầu.\n`;
+            trailerText += `> Hắn đang đếm ngược chuỗi lệnh tự hủy. Nếu thành công, nền văn minh sẽ quay về thời kỳ đồ đá.\n\n`;
+            trailerText += `> Mọi Siêu Máy Tính AI đều đã thất bại trước 12 Tường Lửa Nghịch Lý của hắn.\n`;
+            trailerText += `> Chúng được thiết kế để đánh lừa mọi tư duy máy móc.\n`;
+            trailerText += `> Hi vọng cuối cùng của nhân loại nằm ở trực giác của con người.\n...\n`;
+            trailerText += `> ĐANG TÌM KIẾM ĐẶC VỤ PHÙ HỢP...\n`;
+            trailerText += `<span class="text-term-blue">> [ ĐÃ TÌM THẤY BẠN ]</span>\n\n`;
+            trailerText += `> HỆ THỐNG BẢO MẬT CIPHER_PROTOCOL v9.0\n`;
+            trailerText += `> VUI LÒNG ĐĂNG NHẬP ĐỂ TIẾP TỤC.\n`;
+            trailerText += `> (Nhập ID Đặc vụ bất kỳ để bắt đầu)`;
+
+            typeWriter(trailerText, textContent, 20, () => {
                 loginSection.classList.remove('hidden');
                 loginInput.focus();
+                statusText.innerText = `WAITING FOR LOGIN...`;
             });
         }
 
@@ -466,324 +551,343 @@ Biết rằng chữ số đầu tiên (A) lớn hơn 0 và là SỐ LẺ. Mật 
             const inputVal = loginInput.value.trim().toUpperCase();
             if(!inputVal) return;
 
-            startAmbientBGM();
             loginSection.classList.add('hidden');
             
             if (inputVal === ADMIN_CODE) {
-                isAdmin = true;
-                currentUser = "ROOT_ADMIN";
+                isAdmin = true; currentUser = "ROOT_ADMIN";
+                cliPrefix.innerHTML = `<span class="hidden sm:inline">[ADMIN] </span>${currentUser}@interpol:~# `;
+                cliPrefix.classList.add('admin-mode');
             } else {
-                isAdmin = false;
-                currentUser = inputVal;
+                isAdmin = false; currentUser = inputVal;
+                cliPrefix.innerHTML = `<span class="hidden sm:inline"></span>${currentUser}@interpol:~# `;
+                cliPrefix.classList.remove('admin-mode');
             }
 
-            // Đổi prefix cho mobile
-            cliPrefix.innerHTML = `<span class="hidden sm:inline">${currentUser}@</span>interpol:~# `;
             statusText.innerText = `AUTHENTICATED`;
+            document.getElementById('manual-hack-limit').innerText = `(Mỗi mã lệnh được sử dụng TỐI ĐA ${isAdmin ? '3' : '1'} LẦN trong chiến dịch).`;
+            document.getElementById('btn-manual').classList.remove('hidden');
             showPrologue();
         }
 
+        function showManual() { document.getElementById('manual-modal').classList.remove('hidden'); }
+        function closeManual() { document.getElementById('manual-modal').classList.add('hidden'); passcodeInput.focus(); }
+
         function showPrologue() {
             let storyText = `> XÁC THỰC THÀNH CÔNG.\n> CHÀO MỪNG ĐẶC VỤ [${currentUser}].\n`;
-            storyText += `> QUYỀN TRỢ GIÚP: [${isAdmin ? 'CHO PHÉP - QUYỀN ADMIN' : 'TỪ CHỐI - QUYỀN TIÊU CHUẨN'}]\n\n`;
-            
-            storyText += `[ CẬP NHẬT TÌNH HÌNH - TỐI MẬT ]\n`;
-            storyText += `Năm 2026. "The Architect" đã cài mã độc vào hệ thống Lưới điện vệ tinh. \n`;
-            storyText += `Bạn có thời hạn **03 PHÚT (180 Giây)** ĐỂ GIẢI MÃ MỖI LỚP BẢO MẬT.\n\n`;
-            
-            storyText += `[ CẢNH BÁO AI - TRÍ TUỆ NHÂN TẠO ]\n`;
-            storyText += `- Hắn đã thiết kế các câu đố đánh lừa trực tiếp tư duy máy móc của các hệ thống AI hiện hành. Đừng sử dụng Bot, hãy sử dụng trí tuệ con người.\n`;
-            storyText += `- Trong thời gian máy tính chạy thuật toán bẻ khóa (Decryption), đồng hồ sẽ tự động TẠM DỪNG.\n\n`;
-            
+            storyText += `> QUYỀN TRỢ GIÚP: [ CÓ THỂ ĐÁNH ĐỔI THỜI GIAN ĐỂ LẤY GỢI Ý ]\n`;
+            storyText += `> QUYỀN LỆNH HACK (OVR_CMD): [ MỖI LỆNH ĐƯỢC DÙNG TỐI ĐA ${isAdmin ? '3' : '1'} LẦN ]\n\n`;
+            storyText += `[ NHIỆM VỤ ]\n`;
+            storyText += `- Giải mã 12 TƯỜNG LỬA trước khi thời gian kết thúc.\n`;
+            storyText += `- Bạn có **03 PHÚT (180 Giây)** ĐỂ GIẢI MÃ MỖI LỚP BẢO MẬT.\n\n`;
+            storyText += `[ CẢNH BÁO ]\n`;
+            storyText += `- Lệnh Hack có HIỆU LỰC TẠM THỜI. Khi qua màn, hiệu ứng Hack sẽ bị vô hiệu hóa.\n`;
+            storyText += `- Nhập SAI đáp án: Hệ thống sẽ trừ thời gian theo lũy thừa bậc 3 (3s -> 9s -> 27s -> 81s...).\n\n`;
             storyText += `> SẴN SÀNG KÍCH HOẠT CHUỖI TRUY TÌM?`;
 
-            typeWriter(storyText, textContent, 10, () => {
-                actionSection.classList.remove('hidden');
-            });
+            typeWriter(storyText, textContent, 10, () => { actionSection.classList.remove('hidden'); });
         }
 
         function startGame() {
-            actionSection.classList.add('hidden');
-            document.body.classList.remove('crt-flicker'); 
-            
+            actionSection.classList.add('hidden'); document.body.classList.remove('crt-flicker'); 
             try {
                 let fsPromise = null;
-                if (document.documentElement.requestFullscreen) {
-                    fsPromise = document.documentElement.requestFullscreen();
-                } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
-                    fsPromise = document.documentElement.webkitRequestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
-                    fsPromise = document.documentElement.msRequestFullscreen();
-                }
-                
-                if (fsPromise !== undefined && fsPromise !== null && fsPromise.catch) {
-                    fsPromise.catch(err => console.warn("Tính năng Toàn màn hình bị chặn bởi trình duyệt, game vẫn tiếp tục."));
-                }
-            } catch(e) { console.log("Không thể ép toàn màn hình", e); }
+                if (document.documentElement.requestFullscreen) fsPromise = document.documentElement.requestFullscreen();
+                else if (document.documentElement.webkitRequestFullscreen) fsPromise = document.documentElement.webkitRequestFullscreen();
+                else if (document.documentElement.msRequestFullscreen) fsPromise = document.documentElement.msRequestFullscreen();
+                if (fsPromise && fsPromise.catch) fsPromise.catch(err => console.warn("Fullscreen blocked."));
+            } catch(e) {}
 
-            gameState = 'PLAYING';
-            loadLevel(currentLevelIndex);
+            gameState = 'PLAYING'; loadLevel(currentLevelIndex);
+        }
+
+        function playCinematicTrailer(frames, callback) {
+            cinematicUI.classList.remove('hidden');
+            let frameIdx = 0;
+            
+            let frameInterval = setInterval(() => {
+                cinematicFrameContent.innerText = frames[frameIdx];
+                playTypeSound();
+                frameIdx++;
+                
+                if (frameIdx >= frames.length) {
+                    clearInterval(frameInterval);
+                    setTimeout(() => {
+                        cinematicUI.classList.add('hidden');
+                        callback();
+                    }, 800); 
+                }
+            }, 600); 
         }
 
         function loadLevel(index) {
-            timeLeft = 180;
+            timeLeft = 180; wrongAttempts = 0; 
+            hackTimers = { freeze: 0, ghost: 0 }; isTimerFrozen = false; isGhostMode = false; activeHacksDisplay.innerText = "";
             updateTimerUI();
             
             const level = LEVELS[index];
+            document.getElementById('level-counter').innerText = `${index + 1}/${LEVELS.length}`;
             statusText.innerText = `BYPASSING ${level.target}...`;
             statusText.className = "text-yellow-500 glitch-effect";
             
-            inputSection.classList.add('hidden');
-            hintContainer.classList.add('hidden');
-            hintText.classList.add('hidden');
-            feedbackMsg.innerHTML = '';
-            passcodeInput.value = '';
+            inputSection.classList.add('hidden'); hintContainer.classList.add('hidden'); hintText.classList.add('hidden');
+            feedbackMsg.innerHTML = ''; passcodeInput.value = ''; textContent.innerHTML = '';
             
-            let outputText = `\n> KẾT NỐI ĐẾN: ${level.target}\n`;
-            outputText += `> ĐANG TẢI DỮ LIỆU TÌNH BÁO...\n\n`;
-            outputText += `${level.story}\n\n`;
-            outputText += `====================================================\n`;
-            outputText += `${level.riddle}\n`;
-            outputText += `====================================================\n`;
-            outputText += `> ĐANG CHỜ GIẢI MÃ...`;
+            playCinematicTrailer(level.frames, () => {
+                let outputText = `> KẾT NỐI ĐẾN: ${level.target}\n`;
+                outputText += `> TẢI DỮ LIỆU TÌNH BÁO THÀNH CÔNG...\n\n`;
+                outputText += `<span class="text-term-yellow">${level.story}</span>\n\n`;
+                outputText += `====================================================\n`;
+                outputText += `${level.riddle}\n`;
+                outputText += `====================================================\n`;
+                outputText += `> ĐANG CHỜ GIẢI MÃ...`;
 
-            typeWriter(outputText, textContent, 10, () => {
-                inputSection.classList.remove('hidden');
-                if (isAdmin) hintContainer.classList.remove('hidden');
-                passcodeInput.focus();
-                statusText.innerText = `AWAITING DECRYPTION`;
-                statusText.className = "text-cyan-400";
-                
-                startTimer();
+                typeWriter(outputText, textContent, 10, () => {
+                    inputSection.classList.remove('hidden');
+                    hintContainer.classList.remove('hidden'); 
+                    document.getElementById('btn-hint-main').classList.remove('hidden'); 
+                    passcodeInput.focus();
+                    statusText.innerText = `AWAITING DECRYPTION`;
+                    statusText.className = "text-cyan-400";
+                    startTimer();
+                });
             });
         }
 
-        function showHint() {
+        function showHintConfirm() { document.getElementById('confirm-modal').classList.remove('hidden'); }
+        function closeConfirmModal() { document.getElementById('confirm-modal').classList.add('hidden'); passcodeInput.focus(); }
+
+        function acceptHint() {
+            closeConfirmModal();
+            timeLeft -= 60;
+            if (timeLeft <= 0) {
+                timeLeft = 0; updateTimerUI();
+                showGameOver(`[!] HẾT THỜI GIAN DO ĐÁNH ĐỔI TRỢ GIÚP QUÁ MỨC.\n[!] KẾT NỐI BỊ CHẶN.`);
+                return;
+            }
+            updateTimerUI();
             hintText.innerText = LEVELS[currentLevelIndex].hint;
             hintText.classList.remove('hidden');
+            document.getElementById('btn-hint-main').classList.add('hidden'); 
+            feedbackMsg.innerHTML = `<span class="text-term-yellow">> ĐÃ TRỪ 60 GIÂY. DỮ LIỆU TRỢ GIÚP ĐÃ ĐƯỢC GIẢI MÃ.</span>`;
+            feedbackMsg.className = "warning-text";
+        }
+
+        function handleCheatCode(code) {
+            passcodeInput.value = ''; let msg = ""; let maxHacks = isAdmin ? 3 : 1; 
+
+            if (hackUses[code] !== undefined) hackUses[code]++;
+            let usesLeft = hackUses[code] !== undefined ? maxHacks - hackUses[code] : 0;
+            let limitInfo = `(Lượt dùng lệnh này còn lại: ${usesLeft})`;
+
+            playSuccessSound();
+
+            switch(code) {
+                case "OVR_TIME_ADD":
+                    timeLeft += 180; updateTimerUI();
+                    msg = `> [ROOT_ACCESS] ĐÃ BƠM THÊM 180 GIÂY VÀO HỆ THỐNG.\n> ${limitInfo}`; break;
+                case "OVR_FREEZE":
+                    isTimerFrozen = true; hackTimers.freeze = 30;
+                    msg = `> [ROOT_ACCESS] KÍCH HOẠT FREEZE PROTOCOL.\n> ĐÓNG BĂNG THỜI GIAN TRONG 30 GIÂY.\n> ${limitInfo}`; break;
+                case "OVR_BYPASS":
+                    msg = `> [ROOT_ACCESS] ÉP BUỘC VƯỢT TƯỜNG LỬA... THÀNH CÔNG.\n> ${limitInfo}`;
+                    feedbackMsg.className = "success-text glitch-effect";
+                    typeWriter(msg, feedbackMsg, 20, () => {
+                        setTimeout(() => {
+                            currentLevelIndex++;
+                            if (currentLevelIndex < LEVELS.length) loadLevel(currentLevelIndex);
+                            else showVictory();
+                        }, 3000);
+                    });
+                    return; 
+                case "OVR_GHOST":
+                    isGhostMode = true; hackTimers.ghost = 45;
+                    msg = `> [ROOT_ACCESS] KÍCH HOẠT GHOST MODE (45 GIÂY).\n> ĐÃ VÔ HIỆU HÓA TẠM THỜI ANTI-CHEAT.\n> ${limitInfo}`; break;
+                case "OVR_REVEAL":
+                    msg = `> [ROOT_ACCESS] TIẾT LỘ ĐÁP ÁN: [ ${LEVELS[currentLevelIndex].answer} ]\n> (GHI NHỚ NHANH, THÔNG BÁO NÀY SẼ BIẾN MẤT!)\n> ${limitInfo}`; break;
+                default:
+                    if (hackUses[code] !== undefined) hackUses[code]--; 
+                    msg = `> [LỖI] LỆNH ROOT KHÔNG TỒN TẠI HOẶC BỊ HỎNG. KHÔNG BỊ TRỪ LƯỢT.`;
+                    playErrorSound(); feedbackMsg.className = "error-text";
+                    typeWriter(msg, feedbackMsg, 20, () => {
+                        setTimeout(() => {
+                            feedbackMsg.className = ""; feedbackMsg.innerHTML = "";
+                            inputSection.classList.remove('hidden'); hintContainer.classList.remove('hidden');
+                            if (hintText.classList.contains('hidden')) document.getElementById('btn-hint-main').classList.remove('hidden');
+                            passcodeInput.focus(); statusText.innerText = `AWAITING DECRYPTION`; statusText.className = "text-cyan-400";
+                            startTimer();
+                        }, 2000);
+                    });
+                    return;
+            }
+
+            feedbackMsg.className = "success-text glitch-effect text-purple-400"; feedbackMsg.style.color = "#b026ff"; 
+            typeWriter(msg, feedbackMsg, 20, () => {
+                setTimeout(() => {
+                    feedbackMsg.className = ""; feedbackMsg.innerHTML = ""; feedbackMsg.style.color = "";
+                    inputSection.classList.remove('hidden'); hintContainer.classList.remove('hidden');
+                    if (hintText.classList.contains('hidden')) document.getElementById('btn-hint-main').classList.remove('hidden');
+                    passcodeInput.focus(); statusText.innerText = `AWAITING DECRYPTION`; statusText.className = "text-cyan-400";
+                    startTimer();
+                }, 5000); 
+            });
         }
 
         function checkAnswer() {
             if(isTyping) return;
-            
             const userAnswer = passcodeInput.value.trim().toUpperCase();
             const correctAnswer = LEVELS[currentLevelIndex].answer.toUpperCase();
-            
             if(userAnswer === '') return;
 
-            inputSection.classList.add('hidden');
-            hintContainer.classList.add('hidden');
-            
-            stopTimer();
-            statusText.innerText = `DECRYPTING...`;
-            statusText.className = "text-yellow-500 glitch-effect";
+            if (userAnswer.startsWith("OVR_")) {
+                let maxHacks = isAdmin ? 3 : 1;
+                if (hackUses[userAnswer] !== undefined && hackUses[userAnswer] >= maxHacks) {
+                    playErrorSound(); passcodeInput.value = ''; feedbackMsg.className = "error-text glitch-effect";
+                    typeWriter(`> [CẢNH BÁO] QUYỀN TRUY CẬP LỆNH [${userAnswer}] BỊ TỪ CHỐI.\n> BẠN ĐÃ DÙNG HẾT SỐ LƯỢT CHO PHÉP CỦA LỆNH NÀY (${hackUses[userAnswer]}/${maxHacks}).`, feedbackMsg, 20, () => {
+                        setTimeout(() => { feedbackMsg.innerHTML = ''; passcodeInput.focus(); }, 3000);
+                    }); return;
+                }
+                inputSection.classList.add('hidden'); hintContainer.classList.add('hidden'); stopTimer();
+                statusText.innerText = `OVERRIDING...`; statusText.className = "text-purple-500 glitch-effect";
+                decryptionUI.classList.remove('hidden'); simulateHackProcess(userAnswer); return;
+            }
 
-            decryptionUI.classList.remove('hidden');
-            simulateDecryptionProcess(userAnswer, correctAnswer);
+            inputSection.classList.add('hidden'); hintContainer.classList.add('hidden'); stopTimer();
+            statusText.innerText = `DECRYPTING...`; statusText.className = "text-yellow-500 glitch-effect";
+            decryptionUI.classList.remove('hidden'); simulateDecryptionProcess(userAnswer, correctAnswer);
         }
 
         function generateHex() {
-            const chars = "0123456789ABCDEF";
-            let res = "";
-            for(let i=0; i<8; i++) res += chars[Math.floor(Math.random() * chars.length)];
-            return "0x" + res;
+            const chars = "0123456789ABCDEF"; let res = "";
+            for(let i=0; i<8; i++) res += chars[Math.floor(Math.random() * chars.length)]; return "0x" + res;
+        }
+
+        function simulateHackProcess(code) {
+            let progress = 0;
+            let decryptInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 8) + 3; if(progress > 100) progress = 100;
+                let barLength = 20; let filled = Math.floor((progress/100) * barLength);
+                let bar = "[" + "=".repeat(filled) + ">" + " ".repeat(Math.max(0, barLength - filled - 1)) + "]";
+                decryptionProgress.innerHTML = `<span class="text-purple-400">OVERRIDE CMD : [${code}]</span>\nPROGRESS     : ${bar} ${progress}%\nROOT_INJECT  : ${generateHex()}`;
+                playTypeSound();
+                if (progress >= 100) { clearInterval(decryptInterval); decryptionUI.classList.add('hidden'); handleCheatCode(code); }
+            }, 400); 
         }
 
         function simulateDecryptionProcess(userAnswer, correctAnswer) {
             let progress = 0;
             let decryptInterval = setInterval(() => {
-                progress += Math.floor(Math.random() * 15) + 5;
-                if(progress > 100) progress = 100;
-
-                let barLength = 20;
-                let filled = Math.floor((progress/100) * barLength);
+                progress += Math.floor(Math.random() * 15) + 5; if(progress > 100) progress = 100;
+                let barLength = 20; let filled = Math.floor((progress/100) * barLength);
                 let bar = "[" + "=".repeat(filled) + ">" + " ".repeat(Math.max(0, barLength - filled - 1)) + "]";
-                
-                let matrixCode = `${generateHex()} ${generateHex()} ${generateHex()}`;
-                
-                decryptionProgress.innerHTML = `ANALYZE KEY : [${userAnswer}]\nPROGRESS    : ${bar} ${progress}%\nMEM_DUMP    : ${matrixCode}`;
-                
+                decryptionProgress.innerHTML = `ANALYZE KEY : [${userAnswer}]\nPROGRESS    : ${bar} ${progress}%\nMEM_DUMP    : ${generateHex()}`;
                 playTypeSound();
-
-                if (progress >= 100) {
-                    clearInterval(decryptInterval);
-                    decryptionUI.classList.add('hidden');
-                    evaluateAnswer(userAnswer, correctAnswer);
-                }
+                if (progress >= 100) { clearInterval(decryptInterval); decryptionUI.classList.add('hidden'); evaluateAnswer(userAnswer, correctAnswer); }
             }, 300); 
         }
 
         function evaluateAnswer(userAnswer, correctAnswer) {
             if (userAnswer === correctAnswer) {
-                // MẬT KHẨU ĐÚNG
-                playSuccessSound();
-                statusText.innerText = `ACCESS GRANTED`;
-                statusText.className = "text-term-green";
+                playSuccessSound(); statusText.innerText = `ACCESS GRANTED`; statusText.className = "text-term-green";
                 container.style.boxShadow = "inset 0 0 50px rgba(0, 255, 65, 0.2)";
-                
-                const explanationText = LEVELS[currentLevelIndex].explanation;
-                const successMsgText = `\n> DECRYPTION SUCCESSFUL.\n> ACCESS GRANTED.\n> TẢI XUỐNG DỮ LIỆU... HOÀN TẤT.\n\n[ HỆ THỐNG PHÂN TÍCH LOGIC GIẢI MÃ ]\n${explanationText}\n\n> CHUẨN BỊ CHUYỂN HƯỚNG SANG LỚP BẢO MẬT TIẾP THEO (6 GIÂY)...`;
-
-                typeWriter(successMsgText, feedbackMsg, 20, () => {
+                const successMsgText = `\n> DECRYPTION SUCCESSFUL.\n> ACCESS GRANTED.\n\n[ HỆ THỐNG PHÂN TÍCH LOGIC GIẢI MÃ ]\n${LEVELS[currentLevelIndex].explanation}\n\n> CHUẨN BỊ CHUYỂN HƯỚNG SANG LỚP BẢO MẬT TIẾP THEO (6 GIÂY)...`;
+                typeWriter(successMsgText, feedbackMsg, 10, () => {
                     feedbackMsg.className = "success-text";
                     setTimeout(() => {
                         currentLevelIndex++;
-                        if (currentLevelIndex < LEVELS.length) {
-                            loadLevel(currentLevelIndex); 
-                        } else {
-                            showVictory();
-                        }
+                        if (currentLevelIndex < LEVELS.length) loadLevel(currentLevelIndex); 
+                        else showVictory();
                     }, 6000); 
                 });
             } else {
-                // MẬT KHẨU SAI
-                playErrorSound();
-                statusText.innerText = `ACCESS DENIED`;
-                statusText.className = "text-term-red glitch-effect";
+                wrongAttempts++; let penalty = Math.pow(3, wrongAttempts); timeLeft -= penalty;
+                if (timeLeft <= 0) {
+                    timeLeft = 0; updateTimerUI();
+                    showGameOver(`[!] CẢNH BÁO TỐI CAO: HẾT THỜI GIAN KẾT NỐI.\n[!] BẠN ĐÃ BỊ TRỪ QUÁ NHIỀU THỜI GIAN DO NHẬP SAI (TRỪ ${penalty}S).`); return;
+                }
+                playErrorSound(); statusText.innerText = `ACCESS DENIED`; statusText.className = "text-term-red glitch-effect";
                 container.style.boxShadow = "inset 0 0 50px rgba(255, 0, 60, 0.2)";
-                
-                typeWriter(`\n> ERROR: INVALID CIPHER.\n> HỆ THỐNG PHÁT HIỆN XÂM NHẬP.\n> YÊU CẦU NHẬP LẠI.`, feedbackMsg, 30, () => {
+                typeWriter(`\n> ERROR: INVALID CIPHER.\n> HỆ THỐNG PHÁT HIỆN XÂM NHẬP.\n> HÌNH PHẠT: TRỪ ${penalty} GIÂY.\n> YÊU CẦU NHẬP LẠI.`, feedbackMsg, 30, () => {
                     feedbackMsg.className = "error-text";
                     setTimeout(() => {
-                        feedbackMsg.innerHTML = '';
-                        inputSection.classList.remove('hidden');
-                        if (isAdmin) hintContainer.classList.remove('hidden');
-                        passcodeInput.value = '';
-                        passcodeInput.focus();
-                        statusText.innerText = `AWAITING DECRYPTION`;
-                        statusText.className = "text-cyan-400";
-                        container.style.boxShadow = "none";
-                        if (gameState === 'PLAYING') startTimer(); 
+                        feedbackMsg.innerHTML = ''; inputSection.classList.remove('hidden'); hintContainer.classList.remove('hidden');
+                        if (hintText.classList.contains('hidden')) document.getElementById('btn-hint-main').classList.remove('hidden');
+                        passcodeInput.value = ''; passcodeInput.focus(); statusText.innerText = `AWAITING DECRYPTION`; statusText.className = "text-cyan-400";
+                        container.style.boxShadow = "none"; if (gameState === 'PLAYING') startTimer(); 
                     }, 2000);
                 });
             }
         }
 
         function showGameOver(customReason = null) {
-            stopAmbientBGM();
-            playErrorSound();
-            document.body.classList.add('crt-flicker');
-            statusText.innerText = `SYSTEM FAILURE`;
-            statusText.className = "text-term-red glitch-effect";
+            stopAmbientBGM(); playErrorSound(); document.body.classList.add('crt-flicker');
+            statusText.innerText = `SYSTEM FAILURE`; statusText.className = "text-term-red glitch-effect";
             container.style.boxShadow = "inset 0 0 100px rgba(255, 0, 60, 0.6)";
-
-            inputSection.classList.add('hidden');
-            hintContainer.classList.add('hidden');
-            decryptionUI.classList.add('hidden');
-            
-            gameState = 'END'; 
-            stopTimer(); 
-            
+            inputSection.classList.add('hidden'); hintContainer.classList.add('hidden'); decryptionUI.classList.add('hidden');
+            gameState = 'END'; stopTimer(); 
             let overText = `\n====================================================\n`;
-            if (customReason) {
-                overText += `${customReason}\n`;
-            } else {
-                overText += `[!] CẢNH BÁO TỐI CAO: HẾT THỜI GIAN KẾT NỐI.\n`;
-                overText += `[!] THE ARCHITECT ĐÃ PHÁT HIỆN RA BẠN.\n`;
-            }
-            overText += `[!] KẾT NỐI BỊ CẮT ĐỨT. NHIỆM VỤ THẤT BẠI.\n`;
-            overText += `====================================================\n`;
-
+            if (customReason) overText += `${customReason}\n`;
+            else { overText += `[!] CẢNH BÁO TỐI CAO: HẾT THỜI GIAN KẾT NỐI.\n[!] THE ARCHITECT ĐÃ PHÁT HIỆN RA BẠN.\n`; }
+            overText += `[!] KẾT NỐI BỊ CẮT ĐỨT. NHIỆM VỤ THẤT BẠI.\n====================================================\n`;
             typeWriter(overText, textContent, 30, () => {
                 feedbackMsg.innerHTML = `<button onclick="exitFullscreenAndReload()" class="btn w-full sm:w-auto mt-8 text-red-500 border-red-500 hover:bg-red-500 hover:text-black">THỬ LẠI CHIẾN DỊCH</button>`;
             });
         }
 
         function showAntiCheatScreen(reason) {
-            stopAmbientBGM();
-            playErrorSound();
-            document.body.classList.add('crt-flicker');
-            statusText.innerText = `SECURITY BREACH DETECTED`;
-            statusText.className = "text-term-red glitch-effect";
+            stopAmbientBGM(); playErrorSound(); document.body.classList.add('crt-flicker');
+            statusText.innerText = `SECURITY BREACH DETECTED`; statusText.className = "text-term-red glitch-effect";
             container.style.boxShadow = "inset 0 0 150px rgba(255, 0, 60, 0.8)";
-
-            document.getElementById('output-screen').classList.add('hidden');
-            inputSection.classList.add('hidden');
-            hintContainer.classList.add('hidden');
-            decryptionUI.classList.add('hidden');
-            
-            gameState = 'END'; 
-            stopTimer(); 
-            
+            document.getElementById('output-screen').classList.add('hidden'); inputSection.classList.add('hidden');
+            hintContainer.classList.add('hidden'); decryptionUI.classList.add('hidden');
+            gameState = 'END'; stopTimer(); 
             const antiCheatScreen = document.getElementById('anti-cheat-screen');
-            document.getElementById('anti-cheat-reason').innerText = reason;
-            antiCheatScreen.classList.remove('hidden');
+            document.getElementById('anti-cheat-reason').innerText = reason; antiCheatScreen.classList.remove('hidden');
         }
 
         function showVictory() {
-            stopTimer();
-            stopAmbientBGM();
-            playSuccessSound();
-            document.body.classList.add('crt-flicker');
-            statusText.innerText = `MISSION ACCOMPLISHED`;
-            statusText.className = "text-term-green";
-            
+            stopTimer(); stopAmbientBGM(); playSuccessSound(); document.body.classList.add('crt-flicker');
+            statusText.innerText = `MISSION ACCOMPLISHED`; statusText.className = "text-term-green";
             gameState = 'END'; 
-            
             let victoryText = `====================================================\n`;
             victoryText += `[+] KẾT NỐI THÀNH CÔNG VÀO MAINFRAME CỦA THE ARCHITECT\n`;
             victoryText += `[+] ĐÃ VÔ HIỆU HÓA MÃ ĐỘC.\n`;
             victoryText += `[+] ĐÃ XÁC ĐỊNH TỌA ĐỘ GPS. ĐỘI ĐẶC NHIỆM ĐANG TIẾN VÀO.\n`;
             victoryText += `====================================================\n\n`;
-            victoryText += `CHÚC MỪNG ĐẶC VỤ. BẠN ĐÃ CỨU THẾ GIỚI THÀNH CÔNG.\n`;
+            victoryText += `CHÚC MỪNG ĐẶC VỤ. BẠN ĐÃ VƯỢT QUA 12 TƯỜNG LỬA VÀ CỨU THẾ GIỚI THÀNH CÔNG.\n`;
             victoryText += `BẠN VỪA CHỨNG MINH RẰNG: TRỰC GIÁC VÀ SỰ SÁNG TẠO CỦA CON NGƯỜI LÀ THỨ MÀ MÁY MÓC KHÔNG THỂ BẮT CHƯỚC ĐƯỢC.\n\n`;
             victoryText += `> HỆ THỐNG ĐÓNG.`;
-
-            inputSection.classList.add('hidden');
-            hintContainer.classList.add('hidden');
-            
+            inputSection.classList.add('hidden'); hintContainer.classList.add('hidden');
             typeWriter(victoryText, textContent, 30, () => {
                 feedbackMsg.innerHTML = `<button onclick="exitFullscreenAndReload()" class="btn w-full sm:w-auto mt-8 text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-black">KHỞI ĐỘNG LẠI MÔ PHỎNG</button>`;
             });
         }
 
         function exitFullscreenAndReload() {
-            if (document.fullscreenElement) {
-                document.exitFullscreen().then(() => location.reload()).catch(() => location.reload());
-            } else {
-                location.reload();
-            }
+            if (document.fullscreenElement) { document.exitFullscreen().then(() => location.reload()).catch(() => location.reload()); } 
+            else { location.reload(); }
         }
 
         document.addEventListener('contextmenu', event => event.preventDefault());
-
         document.addEventListener('copy', (e) => {
-            if (gameState === 'PLAYING') {
-                e.preventDefault();
-                feedbackMsg.innerText = "> [CẢNH BÁO] HÀNH VI SAO CHÉP BỊ CHẶN BỞI FIREWALL.";
+            if (gameState === 'PLAYING' && !isGhostMode) {
+                e.preventDefault(); feedbackMsg.innerText = "> [CẢNH BÁO] HÀNH VI SAO CHÉP BỊ CHẶN BỞI FIREWALL.";
                 feedbackMsg.className = "warning-text glitch-effect";
                 setTimeout(() => { if(feedbackMsg.innerText.includes("SAO CHÉP")) feedbackMsg.innerText = ""; }, 2000);
             }
         });
-
         document.addEventListener("visibilitychange", () => {
-            if (document.hidden && gameState === 'PLAYING') {
-                showAntiCheatScreen(`BẠN ĐÃ CHUYỂN TAB HOẶC RỜI KHỎI TRÌNH DUYỆT!`);
-            }
+            if (document.hidden && gameState === 'PLAYING' && !isGhostMode) showAntiCheatScreen(`BẠN ĐÃ CHUYỂN TAB HOẶC RỜI KHỎI TRÌNH DUYỆT!`);
         });
-
         document.addEventListener("fullscreenchange", () => {
-            if (!document.fullscreenElement && gameState === 'PLAYING') {
-                showAntiCheatScreen(`BẠN ĐÃ THOÁT CHẾ ĐỘ TOÀN MÀN HÌNH!`);
-            }
+            if (!document.fullscreenElement && gameState === 'PLAYING' && !isGhostMode) showAntiCheatScreen(`BẠN ĐÃ THOÁT CHẾ ĐỘ TOÀN MÀN HÌNH!`);
         });
-
         window.addEventListener('beforeunload', function (e) {
-            if (gameState === 'PLAYING') {
-                e.preventDefault();
-                e.returnValue = '';
-            }
+            if (gameState === 'PLAYING' && !isGhostMode) { e.preventDefault(); e.returnValue = ''; }
         });
-
-        passcodeInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") { event.preventDefault(); checkAnswer(); }
-        });
-
-        loginInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") { event.preventDefault(); handleLogin(); }
-        });
-
-        window.onload = initSystem;
+        passcodeInput.addEventListener("keypress", function(event) { if (event.key === "Enter") { event.preventDefault(); checkAnswer(); } });
+        loginInput.addEventListener("keypress", function(event) { if (event.key === "Enter") { event.preventDefault(); handleLogin(); } });
+        
+        document.getElementById('typing-cursor').classList.add('hidden');
     </script>
 </body>
 </html>
